@@ -1,4 +1,12 @@
-# Installation Steps
+# Task Management System (Laravel)
+
+This project is a small Laravel-based Task Management System built as part of an assignment. It allows users to manage projects and tasks with proper relationships, status tracking, file uploads, filtering, Excel export, and REST APIs.
+
+The focus of this project is clean backend logic, correct use of Laravel features, and a simple, usable interface.
+
+--------------------------------------------------
+
+INSTALLATION STEPS
 
 git clone <repository-url>
 cd task-manager
@@ -10,78 +18,106 @@ php artisan key:generate
 php artisan migrate --seed
 php artisan serve
 
-# Task Management System (Laravel)
+After setup, the application will be available at:
+http://127.0.0.1:8000
 
-A simple Task Management System built with Laravel to manage Projects and Tasks with CRUD operations, filters, file uploads, Excel export, and REST APIs.
+--------------------------------------------------
 
----
+AUTHENTICATION
 
-## 🚀 Features
+User authentication is implemented using Laravel Breeze.
+Only authenticated users can access and manage projects and tasks.
 
-### 🔐 Authentication
-- User authentication using **Laravel Breeze**
+--------------------------------------------------
 
-### 📁 Projects
-- Create, update, delete projects
-- View project list with **task count**
+PROJECTS
 
-### ✅ Tasks
-- Create, update, delete tasks (soft delete)
-- Assign tasks to projects
-- Track task status:
-  - Pending
-  - In Progress
-  - Completed
-- Upload attachments (PDF/Image, max 2MB)
-- Filter tasks by:
-  - Project
-  - Status
-  - Assigned person
+The application supports full CRUD operations for projects.
 
-### 📊 Export
-- Export tasks to Excel using **Maatwebsite/Excel**
+Create new projects.
+Edit and update existing projects.
+Delete projects.
+Each project can have multiple tasks.
+The project listing page displays the total number of tasks for each project.
 
-### 🌐 REST APIs
-- Get all projects
-- Get all tasks
-- Get tasks by project ID
-- Update task status
+--------------------------------------------------
 
----
+TASKS
 
-## 🗄️ Database Structure
+Tasks are managed under projects and support full CRUD operations.
 
-### Projects Table
-- id
-- name
-- description
-- start_date
-- end_date
+Create, update, and delete tasks (soft delete enabled).
+Each task belongs to a project.
+Task status tracking includes the following states:
+Pending
+In progress
+Completed
 
-### Tasks Table
-- id
-- project_id
-- title
-- description
-- assigned_to
-- status
-- attachment (nullable)
-- due_date
-- deleted_at (soft delete)
+File upload is supported while creating or editing a task.
+Allowed file types: image and PDF.
+Maximum file size: 2MB.
 
----
+Tasks can be filtered based on:
+Project
+Status
+Assigned person
 
-## 🔗 API Endpoints
+--------------------------------------------------
 
-| Method | Endpoint | Description |
-|------|---------|------------|
-| GET | /api/projects | Get all projects |
-| GET | /api/tasks | Get all tasks |
-| GET | /api/projects/{id}/tasks | Get tasks by project |
-| PATCH | /api/tasks/{id}/status | Update task status |
+EXCEL EXPORT
 
-**Example PATCH body:**
-```json
+Tasks can be exported to an Excel file.
+This functionality is implemented using the Maatwebsite/Excel package.
+
+--------------------------------------------------
+
+API ENDPOINTS
+
+The project exposes REST API endpoints for accessing project and task data.
+
+GET    /api/projects              Get all projects
+GET    /api/tasks                 Get all tasks
+GET    /api/projects/{id}/tasks   Get tasks by project ID
+PATCH  /api/tasks/{id}/status     Update task status
+
+Example request body for updating task status:
+
 {
   "status": "completed"
 }
+
+--------------------------------------------------
+
+DATABASE STRUCTURE
+
+PROJECTS TABLE
+id
+name
+description
+start_date
+end_date
+
+TASKS TABLE
+id
+project_id
+title
+description
+assigned_to
+status
+attachment (nullable)
+due_date
+deleted_at (soft delete)
+
+--------------------------------------------------
+
+NOTES
+
+The environment file (.env) is not committed to the repository for security reasons.
+API routes are enabled via bootstrap/app.php (Laravel 12 setup).
+API endpoints were tested using Postman.
+
+--------------------------------------------------
+
+AUTHOR
+
+Harsh Vegad
