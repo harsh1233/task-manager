@@ -9,13 +9,21 @@ The focus of this project is clean backend logic, correct use of Laravel feature
 INSTALLATION STEPS
 
 git clone <repository-url>
+
 cd task-manager
+
 composer install
+
 npm install
+
 npm run build
+
 cp .env.example .env
+
 php artisan key:generate
+
 php artisan migrate --seed
+
 php artisan serve
 
 After setup, the application will be available at:
